@@ -1,29 +1,41 @@
 module.exports = {
-  extends: [
-    "standard",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: ['react-hooks', 'eslint:recommended', 'plugin:react/recommended'],
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script',
+      },
+    },
   ],
-  plugins: ["unicorn"],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  plugins: ['react', 'react-hooks', 'unicorn'],
   rules: {
-    "react/react-in-jsx-scope": "off",
-    "no-unused-vars": [
-      "error",
+    'no-unused-vars': [
+      'error',
       {
-        args: "after-used",
-        caughtErrors: "none",
+        args: 'after-used',
+        caughtErrors: 'none',
         ignoreRestSiblings: true,
-        vars: "all",
+        vars: 'all',
       },
     ],
-    "prefer-const": "error",
-    "react-hooks/exhaustive-deps": "error",
-    "unicorn/filename-case": [
-      "error",
+    'unicorn/filename-case': [
+      'error',
       {
-        case: "kebabCase",
+        case: 'kebabCase',
       },
     ],
-    "max-len": ["error", { code: 140 }],
+    'max-len': ['error', { code: 140 }],
   },
 };
