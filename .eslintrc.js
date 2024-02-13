@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['react-hooks', 'eslint:recommended', 'plugin:react/recommended'],
+  extends: ['plugin:react-hooks/recommended', 'eslint:recommended', 'plugin:react/recommended'],
   overrides: [
     {
       env: {
@@ -19,7 +19,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', 'react-hooks', 'unicorn'],
+  plugins: ['react', 'plugin:react-hooks/recommended', 'unicorn'],
   rules: {
     'no-unused-vars': [
       'error',
