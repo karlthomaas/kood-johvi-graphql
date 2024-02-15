@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { getUserInformation, fetchGraphQL } from 'lib/graphql/queries';
 import { useNavigate } from 'react-router-dom';
+import TransactionsTable from './transactions';
+
 
 export default function User() {
   const navigate = useNavigate();
@@ -9,11 +11,12 @@ export default function User() {
     queryKey: ['getUserID'],
     queryFn: async () => fetchGraphQL(getUserInformation),
 
-    onError: (error) => {
+    onError: () => {
       navigate('/login');
     },
   });
 
+ 
   if (isLoading) return <div>Loading...</div>;
 
   if (data) {
