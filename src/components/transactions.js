@@ -13,11 +13,12 @@ const reshapeDataToAlgorithm = (data) => (
   data.map((transaction) => (
     { date: new Date(transaction.createdAt), amount: transaction.amount}
   ))
-)
+) 
 
 const options = {
   title: 'Transactions',
   curveType: 'function',
+  is3D: true,
   // legend: { position: 'bottom' },
 }
 

@@ -1,4 +1,6 @@
 import Transactions from 'components/transactions';
+import XpProgression from 'components/xp-progression';
+
 import User from 'components/user';
 
 export default function Dashboard() {
@@ -6,7 +8,7 @@ export default function Dashboard() {
     <div>
       {/* <h1>Dashboard</h1> */}
       <User />
-      <Transactions />
+      <XpProgression />
     </div>
   );
 }
