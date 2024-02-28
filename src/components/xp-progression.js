@@ -1,13 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchGraphQL, getTransactions } from 'lib/graphql/queries';
-import { transactionProgression, transactionProgression2 } from 'lib/algorithms/transaction-progression';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { transactionProgression } from 'lib/algorithms/transaction-progression-algo';
+import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import moment from 'moment';
 
 const reshapeDataToAlgorithm = (data) => (
   data.map((transaction) => {
     const date = new Date(transaction.createdAt);
-    date.setDate(1); // set the day to the first day of the month
     return { date, amount: transaction.amount };
   })
 )
@@ -15,36 +14,62 @@ const reshapeDataToAlgorithm = (data) => (
 const reshapeDataToChart = (data) => (
   data.map((transaction) => (
     {
-      name: transaction.date,
+      date: transaction.date,
       amount: transaction.amount,
     }
   ))
 )
 
-const formatXAxis = (tickItem) => (
-  moment(tickItem).format('MMM YYYY')
-)
- 
+let lastMonth = null;
+const formatXAxis = (tickItem) => {
+  const date = new Date(tickItem);
+  const currentMonth = date.toLocaleDateString('default', { month: 'short' });
 
+  if (lastMonth !== currentMonth) {
+    lastMonth = currentMonth;
+    return currentMonth;
+  }
+
+  return '';
+};
+
+const CustomTooltip = ({ active, payload, label }) => {
+
+  if (active && payload && payload.length) {
+    const date = new Date(label);
+    const formattedDate = moment(date).format("DD MMM")
+    return (
+      <div className="text-foreground">
+        <p className="label">{formattedDate}</p>
+        <p className="label">{`Amount: ${payload[0].value}`}</p>
+      </div>
+    );
+  }
+}
 
 export default function XpProgression() {
-    const { data, isloading, isSuccess } = useQuery({
+    const { data } = useQuery({
         queryKey: ['getTransactions'],
-        queryFn: async () => fetchGraphQL(getTransactions),
+        queryFn: async () => fetchGraphQL(getTransactions, { order_by: [{ createdAt: "asc"}]} ),
       });
 
     if (data && data.transaction && data.transaction.length > 0) {
+      console.log(data);
       const reshapedData = reshapeDataToAlgorithm(data.transaction);
       const results = transactionProgression(reshapedData);
       const chartData = reshapeDataToChart(results);
 
       return (
-        <LineChart width={600} height={300} data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 50 }}>
-          <Line type="stepBefore" dataKey="amount" stroke="#8884d8" />
-          <XAxis dataKey="name" interval="preserveEnd" tickFormatter={formatXAxis}/>
-          <YAxis/>
-          <Tooltip />
-        </LineChart>
+        <div className='h-[300px] w-full border border-border'>
+          <ResponsiveContainer height="100%" width="100%">
+            <LineChart width={400} height={300} data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
+              <Line type="stepBefore" dataKey="amount" stroke="hsl(var(--primary))" dot={false} />
+              <XAxis dataKey="date" interval="preserveEnd" tickFormatter={formatXAxis}/>
+              {/* <YAxis/> */}
+              <Tooltip content={<CustomTooltip />} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
       )
 
     }
