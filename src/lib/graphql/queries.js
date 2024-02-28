@@ -84,4 +84,5 @@ query GetUserAudits {
     totalUp
     totalDown
   }
+}
 `
