@@ -21,29 +21,37 @@ export const AuditsRatio = () => {
     const formatedAuditRatio = Math.round(auditRatio * 10) / 10;
 
     return (
-      <div className='h-[310px] w-full rounded-lg border border-border p-4 flex flex-col space-y-4'>
-        <div className='text-2xl'>Audits Ratio</div>
+      <div className='flex h-[280px] w-full flex-col space-y-4 rounded-lg border border-border p-4 sm:h-[300px]'>
+        <div className='text-xl sm:text-2xl'>Audits Ratio</div>
         <div className='flex flex-col space-y-3'>
-          <div className='tracking-wider flex items-center justify-between space-x-7'>
-            <div className='h-[15px] w-full rounded-full bg-primary basis-[70%]' />
-            <div className='flex flex-col basis-[20%]'>
-                <div className='flex ml-auto'>{totalUpMb.toFixed(2)} <span className='ml-1'>Mb</span></div>
-                <div className='flex space-x-1 ml-auto'>Done <ArrowUp/></div>
+          <div className='flex items-center justify-between space-x-7 tracking-wider'>
+            <div className='h-[13px] w-full basis-[70%] rounded-full bg-primary sm:h-[15px]' />
+            <div className='flex basis-[20%] flex-col text-sm sm:text-lg'>
+              <div className='ml-auto flex'>
+                {totalUpMb.toFixed(2)} <span className='ml-1'>Mb</span>
+              </div>
+              <div className='ml-auto flex space-x-1'>
+                Done <ArrowUp />
+              </div>
             </div>
           </div>
-          <div className='tracking-wider flex items-center justify-between space-x-7'>
-            <div className='h-[15px] w-full rounded-full bg-secondary basis-[70%]' />
-            <div className='flex flex-col basis-[20%]'>
-              <div className='flex space-x-1'>Received <ArrowDown/></div>
-              <div className='flex ml-auto'>{totalDownMb.toFixed(2)} <span className='ml-1'>Mb</span></div>
+          <div className='flex items-center justify-between space-x-7 tracking-wider'>
+            <div className='h-[13px] w-full basis-[70%] rounded-full bg-secondary sm:h-[15px]' />
+            <div className='flex basis-[20%] flex-col  text-sm sm:text-lg'>
+              <div className='ml-auto flex space-x-1'>
+                Received <ArrowDown />
+              </div>
+              <div className='ml-auto flex'>
+                {totalDownMb.toFixed(2)} <span className='ml-1'>Mb</span>
+              </div>
             </div>
           </div>
         </div>
         <div
-          className={cn('text-[75px] tracking-wider', {
-              'text-green-400': formatedAuditRatio > 1,
-              'text-yellow-400': formatedAuditRatio <= 1,
-              'text-red-400': formatedAuditRatio <= 0.5,
+          className={cn('text-[65px] tracking-wider sm:text-[70px]', {
+            'text-green-400': formatedAuditRatio > 1,
+            'text-yellow-400': formatedAuditRatio <= 1,
+            'text-red-400': formatedAuditRatio <= 0.5,
           })}
         >
           {formatedAuditRatio.toFixed(1)}
