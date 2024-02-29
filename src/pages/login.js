@@ -67,17 +67,17 @@ export default function Login() {
 
   return (
     <div className='flex h-screen w-full'>
-      <div className='flex h-full w-full items-center justify-center bg-secondary 2xl:basis-[55%]'>
-        <div className='flex h-max w-[90%] max-w-[550px] flex-col space-y-8 rounded-lg bg-foreground pb-7 shadow-lg'>
-          <h1 className='mt-5 text-center text-xl font-medium text-background text-black'>Login to Kood/Jõhvi</h1>
+      <div className='flex h-full w-full items-center justify-center bg-background'>
+        <div className='flex h-max w-[90%] max-w-[550px] flex-col space-y-8 rounded-lg border border-border bg-card pb-7 shadow-lg'>
+          <h1 className='mt-5 text-center text-xl font-medium text-card-foreground'>Login to Kood/Jõhvi</h1>
           <form onSubmit={handleSubmit(onSubmit)} className='mx-auto mt-6 flex w-[95%] flex-col justify-center space-y-3 text-black'>
             <div>
               <Input
                 type='text'
-                placeholder='Username'
+                placeholder='Email'
                 {...register('email', { required: true })}
-                className={clsx('mb-1', {
-                  'border-2 border-red-500': errors.email,
+                className={clsx('mb-1 border-input bg-input text-foreground ring-ring', {
+                  'border-2 border-red-500 ': errors.email,
                 })}
               />
               {errors.email?.type === 'required' && <p className='text-xs text-red-500'>Email is required</p>}
@@ -87,14 +87,14 @@ export default function Login() {
                 type='password'
                 placeholder='Password'
                 {...register('password', { required: true })}
-                className={clsx('mb-1', {
+                className={clsx('mb-1 border-input bg-input text-foreground', {
                   'border-2 border-red-500': errors.password,
                 })}
               />
               {errors.password?.type === 'required' && <p className='text-xs text-red-500'>Password is required</p>}
             </div>
             <p className='text-xs text-red-500'>{errors.password?.message}</p>
-            <Button type='submit' className='pt- mt-3 w-full bg-primary'>
+            <Button type='submit' className='pt- mt-3 w-full bg-primary hover:bg-primary/80'>
               {isPending ? <BeatLoader size={8} color='white' /> : 'Login'}
             </Button>
           </form>
