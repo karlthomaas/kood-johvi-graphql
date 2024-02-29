@@ -1,7 +1,7 @@
 {
   "name": "graphql",
   "version": "0.1.0",
-  "homepage": "https://karlthomaas.github.io/kood-johvi-graphql/",
+  "homepage": "https://karlthomaas.github.io/kood-johvi-graphql",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.9.4",
