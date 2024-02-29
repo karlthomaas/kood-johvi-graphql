@@ -12,7 +12,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename='kood-johvi-graphql'>
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
