@@ -14,10 +14,10 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <script>
-      window.addEventListener('error', function(e){
+      window.addEventListener('error', function (e) {
         // prevent React's listener from firing
         e.stopImmediatePropagation();
-        // prevent the browser's console error message 
+        // prevent the browser's console error message
         e.preventDefault();
       });
     </script>

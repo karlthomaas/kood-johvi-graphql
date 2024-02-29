@@ -3,45 +3,41 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-  ],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended'],
   overrides: [
     {
       env: {
         node: true,
       },
-      files: [".eslintrc.{js,cjs}"],
+      files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
-        sourceType: "script",
+        sourceType: 'script',
       },
     },
   ],
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ["react", "unicorn"],
+  plugins: ['react', 'unicorn'],
   rules: {
-    "no-unused-vars": [
-      "error",
+    'no-unused-vars': [
+      'error',
       {
-        args: "after-used",
-        caughtErrors: "none",
+        args: 'after-used',
+        caughtErrors: 'none',
         ignoreRestSiblings: true,
-        vars: "all",
+        vars: 'all',
       },
     ],
-    "unicorn/filename-case": [
-      "error",
+    'unicorn/filename-case': [
+      'error',
       {
-        case: "kebabCase",
+        case: 'kebabCase',
       },
     ],
-    "max-len": ["error", { code: 140 }],
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
+    'max-len': ['error', { code: 140 }],
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
   },
 };

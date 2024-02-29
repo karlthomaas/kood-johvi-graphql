@@ -6,19 +6,16 @@ import { getUserInformation } from 'lib/graphql/queries';
 export const PrivateRoute = ({ children }) => {
   const [cookies, setCookie] = useCookies(['jwt']);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (!cookies.token) {
       navigate('/login');
     }
 
-    graphQLClient.request(getUserInformation)
-    .catch(() => {
+    graphQLClient.request(getUserInformation).catch(() => {
       setCookie('token', '', { expires: new Date(0) });
       navigate('/login');
     });
-    
-
   }, [cookies.token, navigate, setCookie]);
 
   return children;
