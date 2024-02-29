@@ -4,19 +4,32 @@ import { LogOut, User, Github } from 'lucide-react';
 import { Button } from './ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import demoData from 'data/demo/getUserInformation.json';
 
 export const Navbar = () => {
-  const [, setCookie] = useCookies(['jwt']);
+  const [cookies, setCookie] = useCookies();
 
   const navigate = useNavigate();
   const { data } = useQuery({
     queryKey: ['getUserInformation'],
-    queryFn: async () => fetchGraphQL(getUserInformation),
+    queryFn: async () => {
+      if (cookies.token === 'demo') {
+        return demoData.data;
+      } else {
+        return fetchGraphQL(getUserInformation);
+      }
+    },
   });
 
   const handleSignOut = () => {
+    const token_value = cookies.token;
     setCookie('token', '', { expires: new Date(0) });
-    navigate('/login');
+
+    if (token_value === 'demo') {
+      navigate('/');
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
@@ -37,12 +50,7 @@ export const Navbar = () => {
             <User /> <div>{data.user[0].login}</div>
           </div>
         )}
-        <Button
-          onClick={() => handleSignOut()}
-          variant='ghost'
-          size='icon'
-          className='group text-secondary hover:bg-secondary hover:text-white'
-        >
+        <Button onClick={handleSignOut} variant='ghost' size='icon' className='group text-secondary hover:bg-secondary hover:text-white'>
           <LogOut className='text-secondary group-hover:text-white' />
         </Button>
       </div>

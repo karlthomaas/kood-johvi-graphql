@@ -1,8 +1,4 @@
-import XpProgression from 'components/xp-progression';
-import SkillsProgression from 'components/skills-progression';
-import { TotalXp } from 'components/total-xp';
-import { AuditsRatio } from 'components/audits-ratio';
-import { Navbar } from 'components/navbar';
+import { XpProgression, SkillsProgression, TotalXp, AuditsRatio, Navbar } from 'components';
 
 export default function Dashboard() {
   return (

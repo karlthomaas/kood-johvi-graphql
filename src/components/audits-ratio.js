@@ -2,11 +2,20 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchGraphQL, getUserAudits } from 'lib/graphql/queries';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { cn } from 'lib/utils';
+import { useCookies } from 'react-cookie';
+import demoData from 'data/demo/getAuditRatio.json';
 
 export const AuditsRatio = () => {
+  const [cookies] = useCookies();
+
   const { data } = useQuery({
     queryKey: ['getAuditRatio'],
-    queryFn: async () => fetchGraphQL(getUserAudits),
+    queryFn: async () => {
+      if (cookies.token === 'demo') {
+        return demoData.data;
+      }
+      return fetchGraphQL(getUserAudits);
+    },
   });
 
   const convertByteToMb = (bytes) => {

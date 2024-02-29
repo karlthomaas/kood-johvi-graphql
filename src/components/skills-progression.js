@@ -2,6 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { countTotalSkills, countUserSkills } from 'lib/algorithms/skills-progression-algo';
 import { fetchGraphQL, getProjects, getUserCompletedProjects } from 'lib/graphql/queries';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
+import { useCookies } from 'react-cookie';
+import demoData from 'data/demo/getSkills.json';
+import demoData2 from 'data/demo/getCompletedProjects.json';
 
 const filterSkills = (data, skills) => {
   return data.filter((data) => Object.prototype.hasOwnProperty.call(data.attrs, 'language') && skills.includes(data.attrs.language));
@@ -15,17 +18,30 @@ const reshapeDataToChart = (userSkills, skillsData) => {
   }));
 };
 
-export default function SkillsProgression() {
+export const SkillsProgression = () => {
+  const [cookies] = useCookies();
   const skillsToShow = ['Go', 'Python', 'Java', 'JavaScript', 'Rust'];
 
   const { data: skillsData } = useQuery({
     queryKey: ['getSkills'],
-    queryFn: async () => fetchGraphQL(getProjects),
+    queryFn: async () => {
+      if (cookies.token === 'demo') {
+        return demoData.data;
+      }
+
+      return fetchGraphQL(getProjects);
+    },
   });
 
   const { data: userData } = useQuery({
     queryKey: ['getCompletedProjects'],
-    queryFn: async () => fetchGraphQL(getUserCompletedProjects),
+    queryFn: async () => {
+      if (cookies.token === 'demo') {
+        return demoData2.data;
+      }
+
+      return fetchGraphQL(getUserCompletedProjects);
+    },
   });
 
   if (skillsData && userData) {
@@ -46,4 +62,4 @@ export default function SkillsProgression() {
       </div>
     );
   }
-}
+};

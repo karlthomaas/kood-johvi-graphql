@@ -3,6 +3,8 @@ import { fetchGraphQL, getTransactions } from 'lib/graphql/queries';
 import { transactionProgression } from 'lib/algorithms/transaction-progression-algo';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import moment from 'moment';
+import { useCookies } from 'react-cookie';
+import demoData from 'data/demo/getTransactions.json';
 
 const reshapeDataToAlgorithm = (data) =>
   data.map((transaction) => {
@@ -42,10 +44,17 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 };
 
-export default function XpProgression() {
+export const XpProgression = () => {
+  const [cookies] = useCookies();
   const { data } = useQuery({
     queryKey: ['getTransactions'],
-    queryFn: async () => fetchGraphQL(getTransactions, { order_by: [{ createdAt: 'asc' }] }),
+    queryFn: async () => {
+      if (cookies.token === 'demo') {
+        return demoData.data;
+      }
+
+      return fetchGraphQL(getTransactions, { order_by: [{ createdAt: 'asc' }] });
+    },
   });
 
   if (data && data.transaction && data.transaction.length > 0) {
@@ -66,4 +75,4 @@ export default function XpProgression() {
       </div>
     );
   }
-}
+};

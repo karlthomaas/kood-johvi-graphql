@@ -1,11 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchGraphQL, getTransactions } from 'lib/graphql/queries';
 import { calculateTotalXp } from 'lib/algorithms/total-xp-algo';
+import { useCookies } from 'react-cookie';
+import demoData from 'data/demo/getLatestTransactions.json';
 
 export const TotalXp = () => {
+  const [cookies] = useCookies();
+
   const { data: transactionsData } = useQuery({
     queryKey: ['getLatestTransactions'],
-    queryFn: async () => fetchGraphQL(getTransactions, { order_by: [{ createdAt: 'asc' }] }),
+    queryFn: async () => {
+      if (cookies.token === 'demo') {
+        return demoData.data;
+      }
+      return fetchGraphQL(getTransactions, { order_by: [{ createdAt: 'asc' }] });
+    },
   });
 
   if (transactionsData) {
