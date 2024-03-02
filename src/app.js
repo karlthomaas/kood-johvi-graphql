@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import PrivateRoute from '_helpers/private-route';
 import Home from './pages/home';
@@ -12,7 +13,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter basename='kood-johvi-graphql/'>
+      <HashRouter basename='kood-johvi-graphql/'>
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
@@ -25,7 +26,7 @@ function App() {
             }
           />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </QueryClientProvider>
   );
 }
