@@ -37,11 +37,11 @@ export const Navbar = () => {
       {data?.user ? (
         <a
           target='_blank'
-          href='https://01.kood.tech/git/Karl-Thomas/graphql'
+          href='https://github.com/karlthomaas/kood-johvi-graphql'
           className='flex space-x-1 text-foreground/60 transition-colors duration-150 ease-in hover:text-white'
           rel='noreferrer'
         >
-          <Github /> <p>01.kood.tech/git/Karl-Thomas/graphql</p>
+          <Github /> <p>github.com/karlthomaas/kood-johvi-graphql</p>
         </a>
       ) : null}
       <div className='flex items-center space-x-4'>

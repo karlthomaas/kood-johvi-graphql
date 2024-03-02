@@ -29,26 +29,37 @@ export const AuditsRatio = () => {
     const totalDownMb = convertByteToMb(totalDown);
     const formatedAuditRatio = Math.round(auditRatio * 10) / 10;
 
+    let upPercentage = 0;
+    let downPercentage = 0;
+
+    if (totalUpMb > totalDownMb) {
+      upPercentage = 100;
+      downPercentage = (totalDownMb / totalUpMb) * 100;
+    } else {
+      downPercentage = 100;
+      upPercentage = (totalUpMb / totalDownMb) * 100;
+    }
+
     return (
       <div className='flex h-[280px] w-full flex-col space-y-4 rounded-lg border border-border p-4 sm:h-[300px]'>
         <div className='text-xl sm:text-2xl'>Audits Ratio</div>
         <div className='flex flex-col space-y-3'>
           <div className='flex items-center justify-between space-x-7 tracking-wider'>
-            <div className='h-[13px] w-full basis-[70%] rounded-full bg-primary sm:h-[15px]' />
-            <div className='flex basis-[20%] flex-col text-sm sm:text-lg'>
+            <div style={{ width: `${upPercentage}%` }} className='h-[12px] max-w-[60%] rounded-full bg-primary' />
+            <div className='flex basis-[20%] flex-col text-sm'>
               <div className='ml-auto flex'>
                 {totalUpMb.toFixed(2)} <span className='ml-1'>Mb</span>
               </div>
               <div className='ml-auto flex space-x-1'>
-                Done <ArrowUp />
+                Done <ArrowUp size={20} />
               </div>
             </div>
           </div>
           <div className='flex items-center justify-between space-x-7 tracking-wider'>
-            <div className='h-[13px] w-full basis-[70%] rounded-full bg-secondary sm:h-[15px]' />
-            <div className='flex basis-[20%] flex-col  text-sm sm:text-lg'>
+            <div style={{ width: `${downPercentage}%` }} className='h-[12px] max-w-[60%] rounded-full bg-secondary' />
+            <div className='flex basis-[20%] flex-col  text-sm'>
               <div className='ml-auto flex space-x-1'>
-                Received <ArrowDown />
+                Received <ArrowDown size={20} />
               </div>
               <div className='ml-auto flex'>
                 {totalDownMb.toFixed(2)} <span className='ml-1'>Mb</span>
