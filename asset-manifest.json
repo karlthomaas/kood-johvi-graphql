@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/kood-johvi-graphql/static/css/main.c29fb295.css",
-    "main.js": "/kood-johvi-graphql/static/js/main.8f132f9e.js",
+    "main.css": "/kood-johvi-graphql/static/css/main.e415bb6d.css",
+    "main.js": "/kood-johvi-graphql/static/js/main.68dcf2c3.js",
     "static/js/860.7d40dd19.chunk.js": "/kood-johvi-graphql/static/js/860.7d40dd19.chunk.js",
     "index.html": "/kood-johvi-graphql/index.html",
-    "main.c29fb295.css.map": "/kood-johvi-graphql/static/css/main.c29fb295.css.map",
-    "main.8f132f9e.js.map": "/kood-johvi-graphql/static/js/main.8f132f9e.js.map",
+    "main.e415bb6d.css.map": "/kood-johvi-graphql/static/css/main.e415bb6d.css.map",
+    "main.68dcf2c3.js.map": "/kood-johvi-graphql/static/js/main.68dcf2c3.js.map",
     "860.7d40dd19.chunk.js.map": "/kood-johvi-graphql/static/js/860.7d40dd19.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c29fb295.css",
-    "static/js/main.8f132f9e.js"
+    "static/css/main.e415bb6d.css",
+    "static/js/main.68dcf2c3.js"
   ]
 }
