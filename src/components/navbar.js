@@ -3,17 +3,17 @@ import { fetchGraphQL, getUserInformation } from 'lib/graphql/queries';
 import { LogOut, User, Github } from 'lucide-react';
 import { Button } from './ui/button';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import Cookies from 'universal-cookie';
 import demoData from 'data/demo/getUserInformation.json';
-
 export const Navbar = () => {
-  const [cookies, setCookie] = useCookies();
+  const cookies = new Cookies(null, { path: '/' });
 
   const navigate = useNavigate();
   const { data } = useQuery({
     queryKey: ['getUserInformation'],
     queryFn: async () => {
-      if (cookies.token === 'demo') {
+      const cookie = cookies.get('token');
+      if (cookie === 'demo') {
         return demoData.data;
       } else {
         return fetchGraphQL(getUserInformation);
@@ -23,7 +23,11 @@ export const Navbar = () => {
 
   const handleSignOut = () => {
     const token_value = cookies.token;
-    setCookie('token', '', { expires: new Date(0) });
+    cookies.set('token', '', {
+      expires: new Date(0),
+      sameSite: 'None',
+      secure: true,
+    });
 
     if (token_value === 'demo') {
       navigate('/');

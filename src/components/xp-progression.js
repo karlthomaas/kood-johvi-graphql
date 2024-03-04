@@ -58,7 +58,6 @@ export const XpProgression = () => {
   });
 
   if (data && data.transaction && data.transaction.length > 0) {
-    console.log(data);
     const reshapedData = reshapeDataToAlgorithm(data.transaction);
     const results = transactionProgression(reshapedData);
     const chartData = reshapeDataToChart(results);

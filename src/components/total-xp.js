@@ -18,7 +18,6 @@ export const TotalXp = () => {
   });
 
   if (transactionsData) {
-    console.log(transactionsData.transaction);
     const totalXp = calculateTotalXp(transactionsData.transaction);
     const roundedXp = Math.round(totalXp / 1000);
     return (
