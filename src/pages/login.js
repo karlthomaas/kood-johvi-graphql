@@ -40,8 +40,8 @@ export default function Login() {
         }
       ),
     onError: (error) => {
-      if (error.response.status === 403) {
-        setError('email', { type: 'manual' });
+      if (error.response.status === 403 || error.response.status === 401) {
+        setError('email', { type: 'manual', message: 'Invalid credentials' });
         setError('password', {
           type: 'manual',
           message: 'Invalid credentials',
