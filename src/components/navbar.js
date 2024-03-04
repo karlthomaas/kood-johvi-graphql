@@ -45,12 +45,12 @@ export const Navbar = () => {
           className='flex space-x-1 text-foreground/60 transition-colors duration-150 ease-in hover:text-white'
           rel='noreferrer'
         >
-          <Github /> <p>github.com/karlthomaas/kood-johvi-graphql</p>
+          <Github /> <p className='hidden sm:block'>github.com/karlthomaas/kood-johvi-graphql</p>
         </a>
       ) : null}
       <div className='flex items-center space-x-4'>
         {data?.user && (
-          <div className='flex items-center space-x-2 text-foreground/60 transition-colors duration-150 ease-in hover:text-white'>
+          <div className='hidden items-center space-x-2 text-foreground/60 transition-colors duration-150 ease-in hover:text-white sm:flex'>
             <User /> <div>{data.user[0].login}</div>
           </div>
         )}
