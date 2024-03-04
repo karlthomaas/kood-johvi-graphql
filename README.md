@@ -54,7 +54,7 @@ Start the server
 
 
 
-## This project is hosted on: https://github.com/karlthomaas/kood-johvi-graphql
+## This project is hosted on: https://karlthomaas.github.io/kood-johvi-graphql/
 This project is being hosted in Github pages. If you do not have intra account or do not want to login, the you can use Demo button.
 ## Screenshots
 
