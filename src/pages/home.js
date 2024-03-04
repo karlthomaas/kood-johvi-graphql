@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Button } from 'components/ui/button';
-import { useCookies } from 'react-cookie';
+import Cookies from 'universal-cookie';
 
 export default function Home() {
-  const [, setCookie] = useCookies();
+  const cookies = new Cookies(null, { path: '/' });
 
   const handleDemo = () => {
-    setCookie('token', 'demo', { secure: true, sameSite: 'lax', maxAge: 60 * 60 * 24 * 7 });
+    cookies.set('token', 'demo', { secure: true, sameSite: 'lax', maxAge: 60 * 60 * 24 * 7 });
   };
 
   return (
