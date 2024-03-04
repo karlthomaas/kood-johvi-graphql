@@ -5,17 +5,18 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { encode } from 'base-64';
 import clsx from 'clsx';
-import { useCookies } from 'react-cookie';
+import Cookies from 'universal-cookie';
 import BeatLoader from 'react-spinners/BeatLoader';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 export default function Login() {
-  const [cookie, setCookie] = useCookies(['token']);
+  const cookies = new Cookies(null, { path: '/' });
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (cookie.token) {
+    const cookie = cookies.get('token');
+    if (cookie) {
       navigate('/dashboard');
     }
   });
@@ -49,12 +50,13 @@ export default function Login() {
     },
 
     onSuccess: (data) => {
-      setCookie('token', data.data, {
+      navigate('/dashboard');
+      cookies.set('token', data.data, {
+        path: '/',
         secure: true,
         sameSite: 'strict',
         maxAge: 60 * 60 * 24 * 7,
       });
-      navigate('/dashboard');
     },
   });
 
