@@ -9,6 +9,7 @@ import Cookies from 'universal-cookie';
 import BeatLoader from 'react-spinners/BeatLoader';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { ArrowLeft } from 'lucide-react';
 
 export default function Login() {
   const cookies = new Cookies(null, { path: '/' });
@@ -69,8 +70,19 @@ export default function Login() {
 
   return (
     <div className='flex h-screen w-full'>
-      <div className='flex h-full w-full items-center justify-center bg-background'>
-        <div className='flex h-max w-[90%] max-w-[550px] flex-col space-y-8 rounded-lg border border-border bg-card pb-7 shadow-lg'>
+      <div className='flex h-full w-full flex-col items-center justify-center bg-background'>
+        <div
+          className='\ relative flex h-max w-[90%] max-w-[550px]
+         flex-col space-y-8 rounded-lg border border-border bg-card pb-7 shadow-lg'
+        >
+          <a
+            href='/'
+            className='\ absolute top-[-30px] flex items-center
+           text-neutral-400 transition-colors duration-150 ease-in hover:text-neutral-300 hover:text-secondary/80'
+          >
+            <ArrowLeft className='mr-3' />
+            Back to home page
+          </a>
           <h1 className='mt-5 text-center text-xl font-medium text-card-foreground'>Login to Kood/Jõhvi</h1>
           <form onSubmit={handleSubmit(onSubmit)} className='mx-auto mt-6 flex w-[95%] flex-col justify-center space-y-3 text-black'>
             <div>

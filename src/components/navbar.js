@@ -22,18 +22,19 @@ export const Navbar = () => {
   });
 
   const handleSignOut = () => {
-    const token_value = cookies.token;
+    const cookie = cookies.get('token');
+
+    if (cookie === 'demo') {
+      navigate('/');
+    } else {
+      navigate('/login');
+    }
+
     cookies.set('token', '', {
       expires: new Date(0),
       sameSite: 'None',
       secure: true,
     });
-
-    if (token_value === 'demo') {
-      navigate('/');
-    } else {
-      navigate('/login');
-    }
   };
 
   return (
