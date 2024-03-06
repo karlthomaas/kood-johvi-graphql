@@ -79,7 +79,7 @@ export default function Login() {
           <Link
             to='/'
             className='\ absolute top-[-30px] flex items-center
-           text-neutral-400 transition-colors duration-150 ease-in hover:text-neutral-300 hover:text-secondary/80'
+           text-neutral-400 transition-colors duration-150 ease-in hover:text-neutral-300'
           >
             <ArrowLeft className='mr-3' />
             Back to home page
